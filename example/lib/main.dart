@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:timelines/timelines.dart';
 
 import 'component_page.dart';
@@ -72,17 +71,18 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  bool get _canPop {
+    if (_navigatorKey.currentState?.canPop() ?? false) {
+      _navigatorKey.currentState?.maybePop();
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (_navigatorKey.currentState?.canPop() ?? false) {
-          _navigatorKey.currentState?.maybePop();
-          return false;
-        } else {
-          return true;
-        }
-      },
+    return PopScope(
+      canPop: _canPop,
       child: Column(
         children: [
           Expanded(

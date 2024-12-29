@@ -8,14 +8,11 @@ mixin NavigateMixin on Widget {
   Future<T?> navigate<T>(BuildContext context) {
     if (navigationBuilder == null) {
       return Future.value();
-    } else {
-      return Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => navigationBuilder!(),
-        ),
-      );
     }
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => navigationBuilder!()),
+    );
   }
 }
 
@@ -53,7 +50,7 @@ class NavigationCard extends StatelessWidget with NavigateMixin {
   }
 }
 
-class TitleAppBar extends StatelessWidget with PreferredSizeWidget {
+class TitleAppBar extends StatelessWidget implements PreferredSizeWidget {
   TitleAppBar(
     this.title, {
     Key? key,

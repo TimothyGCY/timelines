@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -139,7 +138,8 @@ class _ShowcaseCard extends StatelessWidget {
                         ),
                       ),
                       onTap: () async {
-                        if (await canLaunch(url)) await launch(url);
+                        final Uri uri = Uri.parse(url);
+                        if (await canLaunchUrl(uri)) await launchUrl(uri);
                       },
                     ),
                   ),
